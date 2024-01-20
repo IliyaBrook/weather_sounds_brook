@@ -3,15 +3,27 @@ import './styles.scss';
 const volumeControl = document.getElementById('volume') as HTMLInputElement;
 const background = document.getElementById('background') as HTMLDivElement;
 
-const sounds = {
-    summer: new Audio(require('./assets/sounds/summer.mp3')),
-    winter: new Audio(require('./assets/sounds/winter.mp3')),
-    rain: new Audio(require('./assets/sounds/rain.mp3')),
-};
+const sounds: { [key: string]: HTMLAudioElement } = {};
+
+
+async function loadSound(soundFile: string) {
+    const module = await import(`./assets/sounds/${soundFile}`);
+    return new Audio(module.default);
+}
+
+async function loadSounds() {
+    sounds.summer = await loadSound('summer.mp3');
+    sounds.winter = await loadSound('winter.mp3');
+    sounds.rain = await loadSound('rain.mp3');
+}
+
+window.addEventListener('load', () => {
+    loadSounds().catch(e => console.error('Failed to load sounds:', e));
+});
 
 let currentSound: HTMLAudioElement | null = null;
 
-function playSound(soundKey: keyof typeof sounds, bgImage: string) {
+async function playSound(soundKey: keyof typeof sounds, bgImage: string) {
     if (currentSound) {
         currentSound.pause();
     }
@@ -19,7 +31,11 @@ function playSound(soundKey: keyof typeof sounds, bgImage: string) {
     if (currentSound !== sounds[soundKey]) {
         currentSound = sounds[soundKey];
         currentSound.currentTime = 0;
-        currentSound.play();
+        try {
+            await currentSound.play();
+        } catch (error) {
+            console.error('Error playing sound:', error);
+        }
     } else {
         currentSound = null;
     }
@@ -33,7 +49,6 @@ volumeControl.addEventListener('input', (e) => {
         audio.volume = parseFloat(volume);
     });
 });
-
 
 document.getElementById('playSummer')!.addEventListener('click', () => playSound('summer', 'summer-bg.jpg'));
 document.getElementById('playWinter')!.addEventListener('click', () => playSound('winter', 'winter-bg.jpg'));
