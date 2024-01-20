@@ -1,10 +1,15 @@
 import './styles.scss';
 
+type SoundKey = keyof typeof sounds;
+
 const volumeControl = document.getElementById('volume') as HTMLInputElement;
 const background = document.getElementById('background') as HTMLDivElement;
 
 const sounds: { [key: string]: HTMLAudioElement } = {};
 
+let currentSound: HTMLAudioElement | null;
+let currentSoundKey: keyof typeof sounds | null;
+let isPaused = false;
 
 async function loadSound(soundFile: string) {
     const module = await import(`./assets/sounds/${soundFile}`);
@@ -21,23 +26,31 @@ window.addEventListener('load', () => {
     loadSounds().catch(e => console.error('Failed to load sounds:', e));
 });
 
-let currentSound: HTMLAudioElement | null = null;
-
 async function playSound(soundKey: keyof typeof sounds, bgImage: string) {
-    if (currentSound) {
+    if (currentSound && currentSoundKey === soundKey && !isPaused) {
+        currentSound.pause();
+        isPaused = true;
+        return;
+    }
+
+    if (currentSound && currentSoundKey !== soundKey) {
         currentSound.pause();
     }
 
-    if (currentSound !== sounds[soundKey]) {
-        currentSound = sounds[soundKey];
-        currentSound.currentTime = 0;
-        try {
-            await currentSound.play();
-        } catch (error) {
-            console.error('Error playing sound:', error);
-        }
+    currentSound = sounds[soundKey];
+    currentSoundKey = soundKey;
+
+    if (isPaused && currentSoundKey === soundKey) {
+        isPaused = false;
     } else {
-        currentSound = null;
+        currentSound.currentTime = 0;
+        isPaused = false;
+    }
+
+    try {
+        await currentSound.play();
+    } catch (error) {
+        console.error('Error playing sound:', error);
     }
 
     background.style.backgroundImage = `url(${require(`./assets/images/${bgImage}`)})`;
