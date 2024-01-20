@@ -1,29 +1,19 @@
 import './styles.scss';
-
-type SoundKey = keyof typeof sounds;
+import {Tsounds} from "types";
+import {loadSounds} from "./functions/loadSounds";
 
 const volumeControl = document.getElementById('volume') as HTMLInputElement;
 const background = document.getElementById('background') as HTMLDivElement;
 
-const sounds: { [key: string]: HTMLAudioElement } = {};
+const sounds: Tsounds = {};
 
 let currentSound: HTMLAudioElement | null;
 let currentSoundKey: keyof typeof sounds | null;
 let isPaused = false;
 
-async function loadSound(soundFile: string) {
-    const module = await import(`./assets/sounds/${soundFile}`);
-    return new Audio(module.default);
-}
-
-async function loadSounds() {
-    sounds.summer = await loadSound('summer.mp3');
-    sounds.winter = await loadSound('winter.mp3');
-    sounds.rain = await loadSound('rain.mp3');
-}
 
 window.addEventListener('load', () => {
-    loadSounds().catch(e => console.error('Failed to load sounds:', e));
+    loadSounds(sounds).catch(e => console.error('Failed to load sounds:', e));
 });
 
 async function playSound(soundKey: keyof typeof sounds, bgImage: string) {
