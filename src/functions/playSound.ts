@@ -1,4 +1,4 @@
-import {TSound, TSounds} from "types";
+import {TSound} from "types";
 import {IPlaySoundArgs} from "interfaces";
 
 let currenTSound: HTMLAudioElement | null;
