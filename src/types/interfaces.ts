@@ -4,4 +4,5 @@ export interface IPlaySoundArgs {
     soundKey: TSound;
     bgImage: string;
     sounds: TSounds;
+    bg: HTMLDivElement
 }

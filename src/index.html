@@ -7,12 +7,21 @@
 </head>
 <body>
 <div id="background" class="background"></div>
-<div class="controls">
-    <label for="volume" class="volume-label">Volume Control</label>
-    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5"/>
-    <button id="playSummer">Summer</button>
-    <button id="playWinter">Winter</button>
-    <button id="playRain">Rain</button>
+<div class="container">
+    <div class="header">
+        Weather sounds
+    </div>
+    <div class="controls">
+        <div class="soundsControlWrapper">
+            <button id="playSummer">Summer</button>
+            <button id="playRain">Rain</button>
+            <button id="playWinter">Winter</button>
+        </div>
+        <div class="volumeControlWrapper">
+            <label for="volume" class="volume-label">Volume Control</label>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5"/>
+        </div>
+    </div>
 </div>
 <script src="bundle.js"></script>
 </body>

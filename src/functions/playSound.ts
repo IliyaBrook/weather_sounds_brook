@@ -5,9 +5,10 @@ let currenTSound: HTMLAudioElement | null;
 let currenTSoundKey: TSound | null;
 let isPaused = false;
 
-const background = document.getElementById('background') as HTMLDivElement;
-export async function playSound({soundKey, bgImage, sounds}: IPlaySoundArgs) {
 
+export async function playSound({soundKey, bgImage, sounds, bg }: IPlaySoundArgs) {
+
+    bg.style.filter = 'none';
     if (currenTSound && currenTSoundKey === soundKey && !isPaused) {
         currenTSound.pause();
         isPaused = true;
@@ -34,5 +35,5 @@ export async function playSound({soundKey, bgImage, sounds}: IPlaySoundArgs) {
         console.error('Error playing sound:', error);
     }
 
-    background.style.backgroundImage = `url(${require(`../assets/images/${bgImage}`)})`;
+    bg.style.backgroundImage = `url(${require(`../assets/images/${bgImage}`)})`;
 }
