@@ -24,7 +24,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  .volume-label{
+
+  .volume-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -32,11 +33,12 @@ body {
     padding: 0;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
-    border: 0;
   }
-  #volume{
+
+  #volume {
     width: 200px;
   }
+
   button {
     cursor: pointer;
   }
