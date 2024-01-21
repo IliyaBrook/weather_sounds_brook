@@ -1,0 +1,30 @@
+{
+  "name": "weather_sounds",
+  "version": "1.0.0",
+  "description": "weather sounds ts course project",
+  "main": "src/index.ts",
+  "repository": "https://github.com/IliyaBrook/weather_sounds_brook",
+  "author": "iliya brook <iliyabrook1987@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --open --port 3005",
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --open --port 3005"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.9.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "sass": "^1.70.0",
+    "sass-loader": "^14.0.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {}
+}
