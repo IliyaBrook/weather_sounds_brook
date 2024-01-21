@@ -1,4 +1,4 @@
-import {TSounds} from "types";
+import {TSounds} from "../types/types";
 
 async function loadSound(soundFile: string) {
     const module = await import(`../assets/sounds/${soundFile}`);

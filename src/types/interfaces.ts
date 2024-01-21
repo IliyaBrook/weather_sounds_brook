@@ -1,4 +1,5 @@
-import {TSound, TSounds} from "types";
+import {TSound, TSounds} from "./types";
+
 
 export interface IPlaySoundArgs {
     soundKey: TSound;

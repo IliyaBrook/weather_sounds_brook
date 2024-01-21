@@ -1,7 +1,8 @@
 import './styles.scss';
-import {TSounds} from "types";
+import {TSounds} from "./types/types";
 import {loadSounds} from "./functions/loadSounds";
 import {playSound} from "./functions/playSound";
+
 
 const volumeControl = document.getElementById('volume') as HTMLInputElement;
 

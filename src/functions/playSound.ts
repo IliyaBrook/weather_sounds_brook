@@ -1,5 +1,5 @@
-import {TSound} from "types";
-import {IPlaySoundArgs} from "interfaces";
+import {TSound} from "../types/types";
+import {IPlaySoundArgs} from "../types/interfaces";
 
 let currenTSound: HTMLAudioElement | null;
 let currenTSoundKey: TSound | null;
